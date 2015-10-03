@@ -1,0 +1,194 @@
+*.mo
+*.cache
+*.class
+*.classpath
+*.eml
+*.exe
+*.idea
+*.iml
+*.o
+*.project
+*.pyc
+*.suo
+*.user
+*.ropeproject
+.DS_Store
+.pbdeps
+.settings
+.slashcache
+.slashtimestamps
+.tarfiles
+.*.swp
+.pydevproject
+
+Bin
+bin-debug
+bin-release
+build
+classes
+Debug
+dist
+lib_managed
+obj
+Release
+src_managed
+
+# Ignore maven build outputs
+target
+artifacts
+
+# /
+/.editorconfig
+/.metadata
+/.wx
+RunBrowser.out
+
+# /3d/
+/3d/geo_files
+/3d/anomaly/project/boot
+/3d/anomaly/project/plugins/project
+/3d/anomaly/project/plugins/boot
+/3d/hql/debugQuery/precision
+
+# /apiService
+/apiService/ConvivaApiService/site-settings.py
+
+# /common
+/common/algos/testsuite/cxx_tests.cc
+/common/messageDefs/pbtest.cc
+/common/messageDefs/*_pbtest.cc
+/common/structDefs/pbtest.cc
+/common/structDefs/*_pbtest.cc
+/common/util/auto_svn_ver.h
+
+# /golang
+/golang/pkg
+/golang/bin
+
+# /iOS/demoApp
+/iOS/demoApp/demoApp.xcodeproj/project.xcworkspace
+/iOS/demoApp/demoApp.xcodeproj/xcuserdata
+/iOS/demoApp/demoAppIntegration.xcodeproj/project.xcworkspace
+/iOS/demoApp/demoAppIntegration.xcodeproj/xcuserdata
+
+# /cws
+/cws/cClient/docs
+/cws/iOSClient/TestAVPlayer/TestAVPlayer.xcodeproj/project.xcworkspace
+/cws/iOSClient/TestAVPlayer/TestAVPlayer.xcodeproj/xcuserdata
+/cws/testPlayer/js/playstation/trilithium/ConvivaOrangePlayer_Trilithium/js/autotouch/AutoTouchDriver.js
+/cws/testPlayer/js/playstation/libjscript/ConvivaOrangePlayer_Libjscript/scripts/autotouch/AutoTouchDriver.js
+
+# /livePass/
+/livePass/.metadata
+/livePass/NBC_utilities
+/livePass/coveragedata
+/livePass/module_nochunk
+/livePass/module/asdoc-output
+/livePass/moduleSwf/*.sspj
+/livePass/moduleSwf/*.swf
+/livePass/samples/IntegrationSamples/src/*.swf
+/livePass/tools/BackStage/build.properties
+
+# /livePass/messageDefs/
+/livePass/messageDefs/Heartbeat_pbtest.cc
+/livePass/messageDefs/ClientGatewayHb_pbtest.cc
+/livePass/messageDefs/ClientGatewayMsgs_pbtest.cc
+/livePass/messageDefs/CommonMsgs_pbtest.cc
+/livePass/messageDefs/CustomMetricsMsgs_pbtest.cc
+/livePass/messageDefs/GatewayRccMsgs_pbtest.cc
+/livePass/messageDefs/Lp2Messages_pbtest.cc
+
+# /livePass/osmf
+/livePass/osmf/*/html-template
+
+# /livePass/testclient
+/livePass/testclient/support/silvertest_setup.js
+/livePass/testclient/support/testclient_setup.js
+/livePass/testclient/support/classLoader/LoadedModule.as
+/livePass/testclient/support/classLoader/LoadedModule1.swf
+/livePass/testclient/support/classLoader/LoadedModule2.swf
+/livePass/testclient/support/classLoader/livePassConfigTest_alt.xml
+/livePass/testclient/support/classLoader/version.*/
+/livePass/testclient_telemetry/testclient_telemetry.swf
+
+# /lrl
+/lrl/chord/messageDefs/*_pbtest.cc
+/lrl/i3/messageDefs/*_pbtest.cc
+
+# /luaLivePass/tests/
+/luaLivePass/tests/*.deuser
+
+# /portal/
+/portal/attachments
+/portal/emailReports/tmpfiletrans.html
+/portal/emailReports/auth.sh
+
+# /portal/profiling/
+/portal/profiling/*beam
+/portal/profiling/*dump
+/portal/profiling/test_py.erl
+
+# /project/
+/project/.metadata
+/project/eclipse/.metadata
+
+# /scoop/
+/scoop/server/pkg
+
+# /silverLivePass
+/silverLivePass/LivePass/common
+/silverLivePass/LivePassModule/common
+/silverLivePass/samples/MMPPFDemoPlayer/MMPPFDemoPlayer.Web/bin
+
+# /testapi/testserver/
+/testapi/testserver/jstest_setup.js
+/testapi/testserver/pulsetester_setup.js
+/testapi/testserver/silvertest_setup.js
+/testapi/testserver/testclient_setup.js
+/testapi/testserver/staging/*
+
+# /tools/pingsReport
+/tools/pingsReport/summaries/
+
+# /tools/packetbrain
+/tools/packetbrain/test/*.ncb
+/tools/packetbrain/test/*.stackdump
+/tools/packetbrain/test/*.swc
+/tools/packetbrain/test/*_pbtest.cc
+/tools/packetbrain/test/Array_ingredients.cs
+/tools/packetbrain/test/Array_name.cs
+/tools/packetbrain/test/Array_sliceKinds.cs
+/tools/packetbrain/test/Array_strName.cs
+/tools/packetbrain/test/Bread.cs
+/tools/packetbrain/test/BreadOrigin.cs
+/tools/packetbrain/test/Flags_spices.cs
+/tools/packetbrain/test/Ingredient.cs
+/tools/packetbrain/test/PB_*.cc
+/tools/packetbrain/test/PB_*.h
+/tools/packetbrain/test/PB_bread.py
+/tools/packetbrain/test/PB_sandwich.py
+/tools/packetbrain/test/Properties
+/tools/packetbrain/test/Sandwich.cs
+/tools/packetbrain/test/SandwichPbtestDebug
+/tools/packetbrain/test/TestSandwichDebug
+/tools/packetbrain/test/com
+/tools/packetbrain/test/output.*
+/tools/packetbrain/test/cxx/*.ncb
+/tools/packetbrain/test/cxx/TestPacketbrainDebug
+/tools/packetbrain/test/cxx/TestPacketbrain_loggerDebug
+/tools/packetbrain/test/cxx.logger/*
+
+# /tools/slash
+/tools/slash/tests/*.actual.as
+
+# /vault/
+/vault/static/css
+/vault/static/min
+/vault/geo_data
+
+# /vma/
+/vma/Backend/src/com/rinera/ConvivaVersion.java
+/vma/GA/src/com/rinera/ga/ConvivaVersion.java
+/vma/pulse3/src/xml/configuration.xml
+/vma/utils/src/com/conviva/utils/ConvivaVersionDynamic.java
+/vma/setupTools/src/test/resources/lp_vma_config.xml
