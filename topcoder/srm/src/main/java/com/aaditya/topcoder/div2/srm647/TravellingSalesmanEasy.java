@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+//500
 public class TravellingSalesmanEasy {
     public static int getMaxProfit(int M, int[] profit, int[] city, int[] visit) {
         // Construct the mapping from city to ordered profit.
@@ -31,8 +32,8 @@ public class TravellingSalesmanEasy {
 
     public static void main(String[] args) {
         System.out.println(getMaxProfit(2,
-                new int[]{3, 10},
-                new int[]{1, 1},
-                new int[]{2, 1}));
+            new int[]{3, 10},
+            new int[]{1, 1},
+            new int[]{2, 1}));
     }
 }

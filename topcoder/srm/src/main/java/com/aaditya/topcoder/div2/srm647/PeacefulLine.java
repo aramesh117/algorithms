@@ -1,5 +1,6 @@
 package com.aaditya.topcoder.div2.srm647;
 
+//250
 public class PeacefulLine {
 
     public static String makeLine(int[] x) {
@@ -31,6 +32,6 @@ public class PeacefulLine {
     }
 
     public static void main(String[] args) {
-        System.out.println(makeLine(new int[]{1,1,1,2}));
+        System.out.println(makeLine(new int[]{1, 1, 1, 2}));
     }
 }
