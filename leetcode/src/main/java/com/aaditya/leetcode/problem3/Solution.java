@@ -1,31 +1,34 @@
 package com.aaditya.leetcode.problem3;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Solution {
     public static int lengthOfLongestSubstring(String s) {
-        Map<Character, Integer> lastPosition = new HashMap<>();
-        if(s.length() == 0) {
-            return 0;
-        }
-        int maxLengthSoFar = 1;
-        int start = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (lastPosition.containsKey(s.charAt(i))) {
-                maxLengthSoFar = Math.max(maxLengthSoFar, i - lastPosition.get(s.charAt(i)));
-                lastPosition.put(s.charAt(i), i);
-                start = i;
+        int i = 0, j = 0, max = 0;
+        Set<Character> set = new HashSet<>();
+        while(j < s.length()) {
+            if(!set.contains(s.charAt(j))) {
+                set.add(s.charAt(j));
+                max = Math.max(max, set.size());
+                j++;
             } else {
-                maxLengthSoFar = Math.max(maxLengthSoFar, i - start + 1);
-                lastPosition.put(s.charAt(i), i);
+                set.remove(s.charAt(i));
+                i++;
             }
         }
-        return maxLengthSoFar;
+        return max;
     }
 
     public static void main(String[] args) {
-        System.out.println(lengthOfLongestSubstring("aubbabcdef"));
+//        System.out.println(lengthOfLongestSubstring("aubb"));
+//        System.out.println(lengthOfLongestSubstring("fffa"));
+//        System.out.println(lengthOfLongestSubstring("aubf"));
+//        System.out.println(lengthOfLongestSubstring("aubfbbabcdefghijk"));
+        System.out.println(lengthOfLongestSubstring("abcdefghiiiiabcdefghijklmnopqrstuvwxyz"));
+//        System.out.println(lengthOfLongestSubstring("aab"));
+//        System.out.println(lengthOfLongestSubstring("abba"));
+//        System.out.println(lengthOfLongestSubstring("tmmzuxt"));
     }
 }
 
