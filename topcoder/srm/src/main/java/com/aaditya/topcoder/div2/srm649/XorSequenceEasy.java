@@ -8,8 +8,8 @@ public class XorSequenceEasy {
         for (int j = 0; j < A.length; j++) {
             for (int k = j + 1; k < A.length; k++) {
                 for (int i = numBits - 1; i >= 0; i--) {
-                    if (((A[j] >> i) & 1) != ((A[k] >> i) & 1)) {
-                        largestBitCounts[i][(A[j] >> i) & 1]++;
+                    if ((A[j] >> i & 1) != (A[k] >> i & 1)) {
+                        largestBitCounts[i][A[j] >> i & 1]++;
                         break;
                     }
                 }

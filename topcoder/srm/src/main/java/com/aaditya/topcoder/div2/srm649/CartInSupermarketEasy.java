@@ -1,47 +1,46 @@
 package com.aaditya.topcoder.div2.srm649;
 
-import java.util.Collections;
-import java.util.PriorityQueue;
+import java.util.Arrays;
 
 public final class CartInSupermarketEasy {
+    private static final int[][] memo = new int[101][101];
+
+    static {
+        for (int i = 0; i < 101; i++) {
+            Arrays.fill(memo[i], -1);
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println(calc(45,5));
+        System.out.println(calc(45, 5));
     }
 
     public static int calc(int N, int K) {
-        if (K >= N) {
-            return (int) (Math.ceil(Math.log(N) / Math.log(2)) + 1.0);
-        } else {
-            // Always gets the largest element of the queue for splitting.
-            PriorityQueue<Integer> sequences = new PriorityQueue<Integer>(N, Collections.reverseOrder());
-            // Initialization of the queue.
-            sequences.add(N);
-            // If the largest element is not 0, then we continue.
-            int numMoves = 0;
-            while (sequences.peek() != 0) {
-                // Take each of the existing sequences by reverse order and perform a move on them.
-                // Once they are done, insert them back into sequences.
-                PriorityQueue<Integer> newSequences = new PriorityQueue<>(N, Collections.reverseOrder());
-                while (!sequences.isEmpty()) {
-                    int maxSeq = sequences.poll();
-                    if (K > 0) {
-                        K--;
-                        if (maxSeq % 2 == 0) {
-                            newSequences.add(maxSeq / 2);
-                            newSequences.add(maxSeq / 2);
-                        } else {
-                            newSequences.add(maxSeq / 2);
-                            newSequences.add(maxSeq / 2 + 1);
-                        }
-                    } else {
-                        newSequences.add(maxSeq - 1);
-                    }
-                }
-                sequences.addAll(newSequences);
-                newSequences.clear();
-                numMoves++;
-            }
-            return numMoves;
+        if (memo[N][K] != -1) {
+            return memo[N][K];
         }
+        if(N == 0) {
+            memo[N][K] = 0;
+            return 0;
+        }
+        if(K <= 0) {
+            memo[N][K] = N;
+            return N;
+        }
+        int withoutDivision;
+        if (K > 0) {
+            withoutDivision = 1 + calc(N - 1, K);
+        } else {
+            withoutDivision = Integer.MAX_VALUE;
+        }
+        int withDivision = Integer.MAX_VALUE;
+        for (int x = 1; x < N; x++) {
+            for (int y = 0; y < K; y++) {
+                int tempWithDivision = 1 + Math.max(calc(x, y), calc(N - x, K - 1 - y));
+                withDivision = Math.min(tempWithDivision, withDivision);
+            }
+        }
+        memo[N][K] = Math.min(withoutDivision, withDivision);
+        return memo[N][K];
     }
 }
