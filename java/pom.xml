@@ -18,6 +18,7 @@
     </modules>
     <properties>
         <jdk.version>1.20</jdk.version>
+        <jdk.release.version>1.17</jdk.release.version>
     </properties>
     <build>
         <pluginManagement>
@@ -29,7 +30,7 @@
                     <configuration>
                         <source>${jdk.version}</source>
                         <target>${jdk.version}</target>
-                        <release>${jdk.version}</release>
+                        <release>${jdk.release.version}</release>
                         <compilerVersion>${jdk.version}</compilerVersion>
                         <fork>true</fork>
                         <compilerId>javac</compilerId>
