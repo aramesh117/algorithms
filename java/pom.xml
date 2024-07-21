@@ -17,8 +17,8 @@
         <module>codefights</module>
     </modules>
     <properties>
-        <jdk.version>1.20</jdk.version>
-        <jdk.release.version>1.17</jdk.release.version>
+        <jdk.version>1.21</jdk.version>
+        <jdk.release.version>1.21</jdk.release.version>
     </properties>
     <build>
         <pluginManagement>
@@ -26,7 +26,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.10.0</version>
+                    <version>3.13.0</version>
                     <configuration>
                         <source>${jdk.version}</source>
                         <target>${jdk.version}</target>
@@ -34,8 +34,6 @@
                         <compilerVersion>${jdk.version}</compilerVersion>
                         <fork>true</fork>
                         <compilerId>javac</compilerId>
-                        <argLine>-Xmx512m</argLine>
-                        <argLine>-XX:MaxPermSize=256m</argLine>
                     </configuration>
                 </plugin>
             </plugins>
@@ -43,9 +41,9 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>LATEST</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.3</version>
         </dependency>
     </dependencies>
 </project>
