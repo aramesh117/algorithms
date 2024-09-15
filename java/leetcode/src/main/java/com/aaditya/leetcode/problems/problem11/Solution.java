@@ -3,12 +3,11 @@ package com.aaditya.leetcode.problems.problem11;
 public class Solution {
     public static int maxArea(int[] height) {
         int maxArea = Integer.MIN_VALUE;
-        int j = height.length - 1;
-        int i = 0;
+        int i = 0, j = height.length - 1;
         while (i <= j) {
-            int area = Math.min(height[i], height[j]) * (j - i);
+            int area = (j - i) * Math.min(height[i], height[j]);
             maxArea = Math.max(maxArea, area);
-            if (height[i] <= height[j]) {
+            if (height[i] < height[j]) {
                 i++;
             } else {
                 j--;
@@ -19,7 +18,7 @@ public class Solution {
 
     public static void main(String[] args) {
         int[] heights = {
-                1, 2, 3, 11, 8, 155000, 10
+                1, 8, 6, 2, 5, 4, 8, 3, 7
         };
         System.out.println(maxArea(heights));
     }

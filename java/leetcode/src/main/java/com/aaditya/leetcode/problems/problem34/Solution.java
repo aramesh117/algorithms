@@ -4,61 +4,53 @@ import java.util.Arrays;
 
 public class Solution {
     public static int[] searchRange(int[] nums, int target) {
-        // Find the first occurrence of target.
-        // Once this is found, we can do a modified binary search before and after again to find the lower bound and
-        // upper bound.
-        int initialIndex = Arrays.binarySearch(nums, target);
-        if (initialIndex < 0) {
+        int startingIndex = Arrays.binarySearch(nums, target);
+        if (startingIndex < 0) {
             return new int[]{-1, -1};
         }
-        // Find number closest to target but less in the lower half. If there is no number less than target, then
-        // return 0.
-        int high = initialIndex;
-        int low = 0;
-        int lowerIndex = high;
-        if (nums[low] == target) {
-            lowerIndex = low;
-        } else {
-            while (low <= high) {
-                int mid = (low + high) / 2;
-                if (nums[mid] < target) {
-                    if (nums[mid + 1] == target) {
-                        lowerIndex = mid + 1;
-                        break;
-                    } else {
-                        low = mid + 1;
-                    }
-                } else {
-                    high = mid - 1;
-                }
+
+        // Upper bound search
+        int low = startingIndex;
+        int high = nums.length - 1;
+        int upperBound;
+        while (low <= high) {
+            int mid = Math.floorDiv(low + high, 2);
+            if (nums[mid] == target && mid + 1 < nums.length && nums[mid + 1] != target) {
+                upperBound = mid;
+                low = mid + 1;
+            } else if (nums[mid] == target) {
+                low = mid + 1;
+            } else {
+                // nums[i] > target since it's sorted
+                high = mid - 1;
             }
         }
+        upperBound = high;
 
-        int upperIndex = nums.length - 1;
-        low = initialIndex;
-        high = nums.length - 1;
-        if (nums[high] == target) {
-            upperIndex = high;
-        } else {
-            while (low <= high) {
-                int mid = (low + high) / 2;
-                if (nums[mid] > target) {
-                    if (nums[mid - 1] == target) {
-                        upperIndex = mid - 1;
-                        break;
-                    } else {
-                        high = mid - 1;
-                    }
-                } else {
-                    low = mid + 1;
-                }
+        low = 0;
+        high = startingIndex;
+        int lowerBound = -1;
+        while (low <= high) {
+            int mid = Math.floorDiv(low + high, 2);
+            if (nums[mid] == target && nums[mid] != target) {
+                upperBound = mid;
+                low = mid + 1;
+            } else if (nums[mid] == target) {
+                high = mid - 1;
+            } else {
+                // nums[i] > target since it's sorted
+                low = mid + 1;
             }
         }
+        lowerBound = low;
 
-        return new int[]{lowerIndex, upperIndex};
+        return new int[]{lowerBound, upperBound};
     }
 
     public static void main(String[] args) {
         System.out.println(Arrays.toString(searchRange(new int[]{1}, 2)));
+        System.out.println(Arrays.toString(searchRange(new int[]{1, 1}, 1)));
+        System.out.println(Arrays.toString(searchRange(new int[]{1, 2, 3, 3, 3, 3}, 6)));
+        System.out.println(Arrays.toString(searchRange(new int[]{1, 1, 1, 2}, 1)));
     }
 }

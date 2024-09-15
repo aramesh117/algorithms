@@ -1,49 +1,51 @@
 package com.aaditya.leetcode.problems.problem200;
 
-public class Solution {
-    public static void main(String[] args) {
-        char[][] grid = {
-                "11000".toCharArray(),
-                "11000".toCharArray(),
-                "00100".toCharArray(),
-                "00011".toCharArray()
-        };
-        System.out.println(numIslands(grid));
-    }
+import java.util.ArrayDeque;
 
-    public static void explore(char[][] grid, int x, int y) {
-        int m = grid.length;
-        int n = grid[0].length;
-        if (x < 0 || x >= m || y < 0 || y >= n || grid[x][y] != '1') {
-            return;
-        }
-        grid[x][y] = '0';
-        // Up
-        explore(grid, x - 1, y);
-        // Left
-        explore(grid, x, y - 1);
-        // Down
-        explore(grid, x + 1, y);
-        // Right
-        explore(grid, x, y + 1);
+class Solution {
+    record Location(int x, int y) {
     }
 
     public static int numIslands(char[][] grid) {
-        if (grid.length == 0 || grid[0].length == 0) {
-            return 0;
-        }
-        int m = grid.length;
-        int n = grid[0].length;
         int numIslands = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j] == '1') {
-                    explore(grid, i, j);
+                    exploreIsland(grid, i, j);
                     numIslands++;
                 }
             }
         }
-
         return numIslands;
+    }
+
+    private static void exploreIsland(char[][] grid, int i, int j) {
+        ArrayDeque<Location> dfsQueue = new ArrayDeque<>();
+        dfsQueue.push(new Location(i, j));
+        while (!dfsQueue.isEmpty()) {
+            var current = dfsQueue.pop();
+            i = current.x;
+            j = current.y;
+            grid[i][j] = '0';
+            if (i - 1 >= 0 && grid[i - 1][j] == '1') {
+                dfsQueue.push(new Location(i - 1, j));
+            }
+            if (j - 1 >= 0 && grid[i][j - 1] == '1') {
+                dfsQueue.push(new Location(i, j - 1));
+            }
+            if (i + 1 < grid.length && grid[i + 1][j] == '1') {
+                dfsQueue.push(new Location(i + 1, j));
+            }
+            if (j + 1 < grid[0].length && grid[i][j + 1] == '1') {
+                dfsQueue.push(new Location(i, j + 1));
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(numIslands(new char[][]{
+                {'1', '1', '0'},
+                {'1', '0', '1'}
+        }));
     }
 }
