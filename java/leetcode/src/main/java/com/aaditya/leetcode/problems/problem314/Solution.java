@@ -1,60 +1,45 @@
 package com.aaditya.leetcode.problems.problem314;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Solution {
+    private static NavigableMap<Integer, List<Integer>> order = new TreeMap<>();
+
     public static void main(String[] args) {
         TreeNode root = new TreeNode(3);
         root.left = new TreeNode(4);
         root.right = new TreeNode(5);
-        root.left.right = new TreeNode(6);
+        root.left.left = new TreeNode(8);
+        root.left.left.right = new TreeNode(9);
+        root.left.left.right.right = new TreeNode(10);
+        root.right.left = new TreeNode(7);
         System.out.println(verticalOrder(root));
     }
 
     public static List<List<Integer>> verticalOrder(TreeNode node) {
         if (node == null) {
-            return Collections.emptyList();
+            return List.of();
         }
-        Map<TreeNode, Integer> columnMap = new LinkedHashMap<>();
-        columnMap.put(node, 0);
-        Queue<TreeNode> bfsQueue = new ArrayDeque<>();
-        bfsQueue.add(node);
+        order = new TreeMap<>();
+        traverse(node, 0, 0);
+        return order.values().stream().toList();
+    }
+
+    record NodeAndDepth(TreeNode node, int column, int depth) {
+    }
+
+    public static void traverse(TreeNode node, int rootColumn, int depth) {
+        var bfsQueue = new ArrayDeque<NodeAndDepth>();
+        bfsQueue.offer(new NodeAndDepth(node, rootColumn, 0));
         while (!bfsQueue.isEmpty()) {
-            TreeNode cur = bfsQueue.poll();
-            int currentCol = columnMap.get(cur);
-            if (cur.left != null) {
-                columnMap.put(cur.left, currentCol - 1);
-                bfsQueue.add(cur.left);
+            var curr = bfsQueue.poll();
+            order.computeIfAbsent(curr.column, c -> new ArrayList<>()).add(curr.node.val);
+            if (curr.node.left != null) {
+                bfsQueue.offer(new NodeAndDepth(curr.node.left, curr.column - 1, curr.depth + 1));
             }
-            if (cur.right != null) {
-                columnMap.put(cur.right, currentCol + 1);
-                bfsQueue.add(cur.right);
+            if (curr.node.right != null) {
+                bfsQueue.offer(new NodeAndDepth(curr.node.right, curr.column + 1, curr.depth + 1));
             }
         }
-        Map<Integer, List<Integer>> res = new TreeMap<>();
-        for (Map.Entry<TreeNode, Integer> entry : columnMap.entrySet()) {
-            res.compute(entry.getValue(), (integer, integers) -> {
-                if (integers == null) {
-                    List<Integer> newList = new ArrayList<>();
-                    newList.add(entry.getKey().val);
-                    return newList;
-                } else {
-                    integers.add(entry.getKey().val);
-                    return integers;
-                }
-            });
-        }
-        List<List<Integer>> finalRes = new ArrayList<>();
-        for (Map.Entry<Integer, List<Integer>> entry : res.entrySet()) {
-            finalRes.add(entry.getValue());
-        }
-        return finalRes;
     }
 }
