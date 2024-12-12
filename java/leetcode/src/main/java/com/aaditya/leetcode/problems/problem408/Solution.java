@@ -2,40 +2,32 @@ package com.aaditya.leetcode.problems.problem408;
 
 class Solution {
     public static boolean validWordAbbreviation(String word, String abbr) {
-        StringBuilder builder = new StringBuilder();
-        int i = 0;
-        String number = "";
-        while (i < abbr.length()) {
-            var currentChar = abbr.charAt(i);
-            if (Character.isAlphabetic(currentChar)) {
-                if (!number.isBlank()) {
-                    var numberParsed = Integer.parseInt(number);
-                    builder.append("*".repeat(Math.max(0, numberParsed)));
-                }
-                builder.append(currentChar);
-                number = "";
+        int i = 0, j = 0;
+        int m = word.length(), n = abbr.length();
+        while (i < m && j < n) {
+            if (word.charAt(i) == abbr.charAt(j)) {
+                i++;
+                j++;
+            } else if (abbr.charAt(j) == '0') {
+                return false;
+            } else if (Character.isDigit(abbr.charAt(j))) {
+                int k = j;
+                while (k < n && Character.isDigit(abbr.charAt(k))) k++;
+                int numChars = Integer.parseInt(abbr.substring(j, k));
+                i += numChars;
+                j = k;
             } else {
-                number += currentChar;
-            }
-            i++;
-        }
-        if (!number.isBlank()) {
-            var numberParsed = Integer.parseInt(number);
-            builder.append("*".repeat(Math.max(0, numberParsed)));
-        }
-        if (builder.length() != word.length()) {
-            return false;
-        }
-        String constructed = builder.toString();
-        for (int j = 0; j < word.length(); j++) {
-            if (constructed.charAt(j) != '*' && constructed.charAt(j) != word.charAt(j)) {
                 return false;
             }
         }
-        return true;
+        return i == m && j == n;
     }
 
     public static void main(String[] args) {
         System.out.println(validWordAbbreviation("internationalization", "i5a11o1"));
+        System.out.println(validWordAbbreviation("internationalization", "i12iz4n"));
+        System.out.println(validWordAbbreviation("apple", "a2e"));
+        System.out.println(validWordAbbreviation("end", "e1d"));
+        System.out.println(validWordAbbreviation("end", "e111"));
     }
 }

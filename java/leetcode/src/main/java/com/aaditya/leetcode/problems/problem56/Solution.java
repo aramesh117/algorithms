@@ -4,34 +4,43 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class Solution {
-    public static List<Interval> merge(List<Interval> intervals) {
-        if (intervals.isEmpty()) {
-            return intervals;
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        var events = new ArrayList<Event>();
+        for (int[] interval : intervals) {
+            events.add(new Event(interval[0], Type.START));
+            events.add(new Event(interval[1], Type.END));
         }
-        Comparator<Interval> comparator = Comparator.comparingInt(o -> o.start);
-        intervals.sort(comparator);
-        List<Interval> res = new ArrayList<>();
-        int start = intervals.get(0).start;
-        int end = intervals.get(0).end;
-        for (Interval i : intervals) {
-            if (i.start > end) {
-                res.add(new Interval(start, end));
-                start = i.start;
-                end = Math.max(end, i.end);
+        events.sort(Comparator.comparingInt((Event value) -> value.pos).thenComparing(event -> event.type));
+        var result = new ArrayList<List<Integer>>();
+        int intervalNesting = 0;
+        int currentIntervalStartPos = -1;
+        for (Event event : events) {
+            if (event.type == Type.START) {
+                if (intervalNesting == 0) {
+                    currentIntervalStartPos = event.pos;
+                }
+                intervalNesting++;
             } else {
-                end = Math.max(i.end, end);
+                intervalNesting--;
+                if (intervalNesting == 0) {
+                    result.add(List.of(currentIntervalStartPos, event.pos));
+                }
             }
         }
-        res.add(new Interval(start, end));
-        return res;
+        int[][] finalResult = new int[result.size()][2];
+        for (int i = 0; i < result.size(); i++) {
+            finalResult[i] = new int[]{result.get(i).getFirst(), result.get(i).get(1)};
+        }
+        return finalResult;
     }
 
-//    public static void main(String[] args) {
-//        List<Interval> intervals = new ArrayList<>();
-//        intervals.add(new Interval(1, 1));
-//        intervals.add(new Interval(0, 0));
-//        intervals.add(new Interval(2, 2));
-//        System.out.println(merge(intervals));
-//    }
+    enum Type {
+        START,
+        END
+    }
+
+    record Event(int pos, Type type) {
+    }
+
 }
